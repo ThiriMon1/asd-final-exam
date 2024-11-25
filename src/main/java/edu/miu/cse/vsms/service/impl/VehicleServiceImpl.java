@@ -24,7 +24,7 @@ public class VehicleServiceImpl implements VehicleService {
         // Write your code here
         VService vservice = new VService();
         Employee employee = employeeRepository.findById(request.employeeId()).orElseThrow(() ->
-                new ResourceNotFoundException("Employee not found"));
+                new ResourceNotFoundException(request.employeeId()+" is not found"));
         vservice.setEmployee(employee);
         vservice.setServiceName(request.serviceName());
         vservice.setCost(request.cost());

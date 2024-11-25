@@ -59,7 +59,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public EmployeeResponseDto getEmployeeById(Long id) {
         // Write your code here
         Employee employee=employeeRepository.findById(id).orElseThrow(()->
-                new ResourceNotFoundException(id+" is not found"));
+                new ResourceNotFoundException("Employee-"+id+" is not found"));
         return mapToResponseDto(employee);
     }
 
@@ -67,7 +67,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public EmployeeResponseDto partiallyUpdateEmployee(Long id, Map<String, Object> updates) {
         // Fetch the employee by ID or throw an exception if not found
         Employee employee = employeeRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Employee not found with id " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Employee-"+ id +" is not found"));
 
         // Apply each update based on the key
         updates.forEach((key, value) -> {
@@ -75,26 +75,22 @@ public class EmployeeServiceImpl implements EmployeeService {
                 case "name":
                     // Write your code here
                     employee.setName((String) value);
-//                    employeeRepository.save(employee);
 
 
                     break;
                 case "email":
                     // Write your code here
                     employee.setEmail((String) value);
-//                    employeeRepository.save(employee);
 
                     break;
                 case "phone":
                     // Write your code here
                     employee.setPhone((String) value);
-//                    employeeRepository.save(employee);
 
                     break;
                 case "hireDate":
                     // Write your code here
                     employee.setHireDate((LocalDate) value);
-//                    employeeRepository.save(employee);
 
                     break;
                 default:
